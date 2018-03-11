@@ -1,0 +1,43 @@
+.qndo-autocomplete-container {
+  display: inline-block;
+  text-align: left;
+  > .search-list {
+    background-color: #ffffff;
+    border-color: #ececec;
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 2px;
+    margin-top: 0px;
+    overflow-wrap: break-word;
+    position: absolute;
+    width: 250px;
+    z-index: 9999;
+    > .search-item {
+      clear: both;
+      color: #000000;
+      margin-bottom: 4px;
+      padding: 5px;
+      cursor: pointer;
+      display: block;
+      margin: 0;
+      padding: 8px 12px;
+      &:hover {
+        background-color: #007bff;
+        color: #fff;
+      }
+      &:active {
+        background-color: #3089e9;
+        color: #fff;
+      }
+    }
+    > .search-item-loading,
+    .search-item-no-data {
+      color: #000000;
+      margin-bottom: 4px;
+      padding: 5px;
+      display: block;
+      margin: 0;
+      padding: 8px 12px;
+    }
+  }
+}

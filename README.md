@@ -1,27 +1,23 @@
-# QndoAutocomplete
+# Qndo-Autocomplete
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.6.8.
+### Installation
+ - Package isn't published to npm yet
+ - Just clone the project, copy **@qndo** folder
 
-## Development server
+### Usage
+  - Clone project
+  - Do npm install
+  - Do ng serve
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
-## Code scaffolding
+## Properties and Events for Component
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+|Attribute| | Description|Type|Required|Default|
+|:---    |:--- |:--- |:--- |:---      |:--- |
+|source| Property |Data source as input. Source can be an array or function that returns observable| Array / Function(service returns Observable)| YES | - |
+| propertyToShow | Property | If your array is a collection of Objects and if it has n properties, pass propertyToShow value to set which property you want to display in dropdown| string | Yes, if source is Array of Objects | - |
+| valueChanged | Event | Value changed Event will omit the dropdown item you selected from dropdown| Function | Yes, If you want to capture the value| -|
+| styles | Property | This will allow to pass custom styles to the auto complete component | string | No | - |
 
-## Build
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
 
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
