@@ -20,15 +20,18 @@ export class AppComponent implements OnInit {
     { value: 'Robert Downey' }
   ];
   remoteSource: any;
-  selectedItem1: any = '';
-  selectedItem2: any = '';
+  selectedItem1: any;
+  selectedItem2: any;
 
   constructor(private searchService: SearchService) {}
   ngOnInit() {
     this.remoteSource = keyword => this.searchService.getSearchResults(keyword);
   }
-  selectItem(value) {
+  selectItemFromLocalSource(value) {
     console.log(value);
-    //this.selectedItem1 = value;
+  }
+
+  selectItemFromRemoteSource(value) {
+    console.log(value);
   }
 }

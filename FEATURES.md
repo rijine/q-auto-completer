@@ -12,8 +12,8 @@
 5. unit testing
 6. arrow for selection
 7. animation ??
-8. documentation -
+8. documentation - done
 9. minimum chars
-10. maximum items
-11. code cleanup
+10. maximum items -
+11. code cleanup - in progress
 12. remote data timer or debounce
