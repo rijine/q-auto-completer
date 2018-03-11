@@ -13,7 +13,7 @@
 6. arrow for selection
 7. animation ??
 8. documentation - done
-9. minimum chars
+9. minimum chars - done
 10. maximum items -
 11. code cleanup - in progress
 12. remote data timer or debounce

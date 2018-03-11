@@ -10,7 +10,8 @@ import { throttleTime } from 'rxjs/operators/throttleTime';
 export class QndoAutoCompleteComponent implements OnInit {
   @Input() source: any;
   @Input() propertyToShow;
-  @Input() styles;
+  @Input() styles = '';
+  @Input() minimumChars: string = '1';
 
   @Output() valueSelected = new EventEmitter<any>();
 
@@ -51,7 +52,7 @@ export class QndoAutoCompleteComponent implements OnInit {
   }
 
   refreshData($event) {
-    if (!this.searchText) {
+    if (!this.searchText || this.searchText.length < parseInt(this.minimumChars)) {
       return;
     }
     this.filteredSource = [];

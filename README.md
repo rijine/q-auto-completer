@@ -16,6 +16,7 @@
 |:---    |:--- |:--- |:--- |:---      |:--- |
 |source| Property |Data source as input. Source can be an array or function that returns observable| Array / Function(service returns Observable)| YES | - |
 | propertyToShow | Property | If your array is a collection of Objects and if it has n properties, pass propertyToShow value to set which property you want to display in dropdown| string | Yes, if source is Array of Objects | - |
+| minimumChars| Property | This will start filtering after minimum characters are crossed | string | No | minimumChars = 1
 | valueChanged | Event | Value changed Event will omit the dropdown item you selected from dropdown| Function | Yes, If you want to capture the value| -|
 | styles | Property | This will allow to pass custom styles to the auto complete component | string | No | - |
 

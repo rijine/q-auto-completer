@@ -8,7 +8,7 @@
     <hr/> Test Component 1: Local Source
     <qndo-auto-complete [source]="localSource" propertyToShow="value" (valueSelected)="selectItemFromLocalSource($event)"></qndo-auto-complete>
     <hr/> Test Component 2: Remote Source
-    <qndo-auto-complete [source]="remoteSource" propertyToShow="word" (valueSelected)="selectItemFromRemoteSource($event)"></qndo-auto-complete>
+    <qndo-auto-complete [source]="remoteSource" minimumChars="3" propertyToShow="word" (valueSelected)="selectItemFromRemoteSource($event)"></qndo-auto-complete>
     <hr/>
     <!-- Test Component 3
     <qndo-auto-complete [source]="remoteSource" styles="style1" propertyToShow="word" (valueSelected)="selectItem($event)"></qndo-auto-complete> -->
