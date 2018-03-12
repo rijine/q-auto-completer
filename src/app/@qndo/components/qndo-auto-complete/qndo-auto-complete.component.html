@@ -1,15 +1,15 @@
 <div class="qndo-autocomplete-container" [ngClass]="styles">
-  <input type="text" (focus)="onFocus()" (blur)="outFocus()" (input)="refreshData($event)" [(ngModel)]="searchText" />
+  <input type="text" (focus)="onFocus()" (blur)="outFocus()" (input)="refreshData($event)" [(ngModel)]="searchText" (keydown)="keyBoardEventHandler($event)" />
   <!-- <qndo-search-list [searchList]="source" [propertyToShow]="value"></qndo-search-list> -->
   <div class="search-list" *ngIf="isDropdownVisible">
-    <div *ngFor="let item of filteredSource" (mousedown)="selectItem(item)" class="search-item">
+    <div *ngFor="let item of filteredSource; let itemIndex = index;" (mousedown)="selectItem(item)" class="search-item" [ngClass]="{'active': selectedIndex === itemIndex}">
       <div>{{getProperty(item)}}</div>
     </div>
     <div *ngIf="isLoading" class="search-item-loading">
       <div>Loading...</div>
     </div>
     <div *ngIf="!isLoading && filteredSource.length <= 0" class="search-item-no-data">
-      <div>No Data Found!</div>
+      <div>No Matching Data Found!</div>
     </div>
   </div>
 </div>

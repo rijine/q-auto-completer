@@ -1,4 +1,11 @@
-import { Component, OnInit, Input, Output, EventEmitter, ViewEncapsulation } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Input,
+  Output,
+  EventEmitter,
+  ViewEncapsulation
+} from '@angular/core';
 import { throttleTime } from 'rxjs/operators/throttleTime';
 
 @Component({
@@ -12,6 +19,7 @@ export class QndoAutoCompleteComponent implements OnInit {
   @Input() propertyToShow;
   @Input() styles = '';
   @Input() minimumChars: string = '1';
+  @Input() listSize: string = '6';
 
   @Output() valueSelected = new EventEmitter<any>();
 
@@ -19,6 +27,7 @@ export class QndoAutoCompleteComponent implements OnInit {
   isLoading = false;
   filteredSource: any[] = [];
   searchText = '';
+  selectedIndex = -1;
 
   constructor() {}
 
@@ -35,6 +44,10 @@ export class QndoAutoCompleteComponent implements OnInit {
     this.isDropdownVisible = false;
   }
 
+  /**
+   * Handler for user item selection, and emit to parent component
+   * @param item single item from list of items
+   */
   selectItem(item: any) {
     console.log(item);
     if (item) {
@@ -42,7 +55,10 @@ export class QndoAutoCompleteComponent implements OnInit {
       this.searchText = this.getProperty(item);
     }
   }
-
+  /**
+   * this will returns property value based on what propertyToShow variable is set
+   * @param item single item of array of items
+   */
   getProperty(item: any) {
     if (typeof item === 'object') {
       return item[this.propertyToShow];
@@ -51,12 +67,18 @@ export class QndoAutoCompleteComponent implements OnInit {
     }
   }
 
+  /**
+   * Listening to input event of text box
+   * @param  Event as textbox input event
+   */
   refreshData($event) {
-    if (!this.searchText || this.searchText.length < parseInt(this.minimumChars)) {
+    if ( !Array.isArray(this.source) &&
+      (!this.searchText ||
+      this.searchText.length < parseInt(this.minimumChars))
+    ) {
       return;
     }
     this.filteredSource = [];
-    //textInput, arrayInput, liveInput
     if (Array.isArray(this.source)) {
       //Cases: array of string, array of objects
       this.filteredSource = this.source.filter(item => {
@@ -64,7 +86,7 @@ export class QndoAutoCompleteComponent implements OnInit {
         return (
           JSON.stringify(item)
             .toLowerCase()
-            .indexOf(this.searchText) !== -1
+            .indexOf(this.searchText.toLowerCase()) !== -1
         );
       });
     } else {
@@ -75,6 +97,50 @@ export class QndoAutoCompleteComponent implements OnInit {
       });
     }
 
-    this.filteredSource = this.filteredSource.slice(0,6);
+    this.filteredSource = this.filteredSource.slice(0, parseInt(this.listSize));
+  }
+
+  /**
+   * Handle keyboard inputs based on key code
+   * UP DOWN arrows, ENTER, TAB keyboard actions are capturing.
+   * @param  Event input
+   */
+  keyBoardEventHandler($event) {
+    if (!this.isDropdownVisible) {
+      this.isDropdownVisible = true;
+    }
+
+    switch ($event.keyCode) {
+      case 38: {
+        if (this.selectedIndex > 0) {
+          this.selectedIndex--;
+        } else {
+          this.selectedIndex = parseInt(this.listSize) - 1;
+        }
+        break;
+      }
+      case 40: {
+        if (this.selectedIndex < parseInt(this.listSize)) {
+          this.selectedIndex++;
+        } else {
+          this.selectedIndex = 0;
+        }
+        break;
+      }
+      case 13:
+      case 9: {
+        if (
+          this.selectedIndex >= 0 &&
+          this.selectedIndex < parseInt(this.listSize)
+        ) {
+          this.selectItem(this.filteredSource[this.selectedIndex]);
+          this.isDropdownVisible = false;
+        }
+        break;
+      }
+      default: {
+        this.selectedIndex = -1;
+      }
+    }
   }
 }

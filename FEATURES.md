@@ -10,10 +10,11 @@
 3. passing styles - done
 4. live data - done
 5. unit testing
-6. arrow for selection
+6. arrow for selection (keyboard controls) - done
 7. animation ??
 8. documentation - done
 9. minimum chars - done
-10. maximum items -
+10. maximum items (list size) - done
 11. code cleanup - in progress
 12. remote data timer or debounce
+13. dropdown open/close trigger ??
