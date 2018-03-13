@@ -8,6 +8,7 @@ import { AppComponent } from './app.component';
 import { QndoModule } from './@qndo/qndo.module';
 import { SearchService } from './services/search.service';
 
+
 @NgModule({
   declarations: [AppComponent],
   imports: [BrowserModule, HttpClientModule, QndoModule, AppRoutingModule],

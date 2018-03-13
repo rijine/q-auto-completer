@@ -16,7 +16,7 @@ import { throttleTime } from 'rxjs/operators/throttleTime';
 })
 export class QndoAutoCompleteComponent implements OnInit {
   @Input() source: any;
-  @Input() propertyToShow;
+  @Input() propertyToShow = 'value';
   @Input() styles = '';
   @Input() minimumChars: string = '1';
   @Input() listSize: string = '6';
@@ -106,8 +106,12 @@ export class QndoAutoCompleteComponent implements OnInit {
    * @param  Event input
    */
   keyBoardEventHandler($event) {
+    let customListLimit = parseInt(this.listSize);
     if (!this.isDropdownVisible) {
       this.isDropdownVisible = true;
+    }
+    if(customListLimit > this.filteredSource.length){
+      customListLimit = this.filteredSource.length;
     }
 
     switch ($event.keyCode) {
@@ -115,12 +119,12 @@ export class QndoAutoCompleteComponent implements OnInit {
         if (this.selectedIndex > 0) {
           this.selectedIndex--;
         } else {
-          this.selectedIndex = parseInt(this.listSize) - 1;
+          this.selectedIndex = customListLimit - 1;
         }
         break;
       }
       case 40: {
-        if (this.selectedIndex < parseInt(this.listSize)) {
+        if (this.selectedIndex < customListLimit - 1) {
           this.selectedIndex++;
         } else {
           this.selectedIndex = 0;
@@ -131,7 +135,7 @@ export class QndoAutoCompleteComponent implements OnInit {
       case 9: {
         if (
           this.selectedIndex >= 0 &&
-          this.selectedIndex < parseInt(this.listSize)
+          this.selectedIndex < customListLimit
         ) {
           this.selectItem(this.filteredSource[this.selectedIndex]);
           this.isDropdownVisible = false;
